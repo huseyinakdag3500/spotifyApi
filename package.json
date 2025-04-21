@@ -13,5 +13,8 @@
     "dotenv": "^16.0.0",
     "compression": "^1.7.4",
     "helmet": "^7.0.0"
-  }
+  },
+  "engines": {
+  "node": "18.x"
+}
 }
