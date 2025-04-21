@@ -24,7 +24,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
     const response = await fetch(`/currently-playing?access_token=${accessToken}`);
     const data = await response.json();
     
-    console.log('Spotify API Ham Veri:', data.raw_data);
+   
     
     if (data.is_playing !== isPlaying || (data.is_playing && data.track_id !== currentTrackId)) {
       isPlaying = data.is_playing;
@@ -77,5 +77,5 @@ if (accessToken) {
   
   getCurrentlyPlaying(accessToken, true);
   
-  setInterval(() => getCurrentlyPlaying(accessToken), 4000);
+  setInterval(() => getCurrentlyPlaying(accessToken), 2000);
 }
