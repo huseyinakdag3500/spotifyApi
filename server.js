@@ -46,7 +46,7 @@ app.get('/login', (req, res) => {
   
     try {
       const data = await spotifyApi.getMyCurrentPlayingTrack();
-      const rawData = data.body;
+      
       if (data.body && data.body.item && data.body.is_playing) {
         res.json({
           is_playing: data.body.is_playing,
@@ -55,7 +55,7 @@ app.get('/login', (req, res) => {
           album: data.body.item.album.name,
           track_id: data.body.item.id,
           image_url: data.body.item.album.images[0]?.url || '',
-          raw_data: rawData,
+          
         });
       } else {
         res.json({
