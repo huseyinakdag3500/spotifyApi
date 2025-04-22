@@ -58,7 +58,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
          var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
-        let barCount = Math.floor(nowPlayingWidth/20)+20;
+        let barCount = Math.floor(nowPlayingWidth/10)+20;
           time_wave.innerHTML ="";
           for(let i = 0 ;i<barCount;i++){
             time_wave.innerHTML += '<div class="bar"></div>';
