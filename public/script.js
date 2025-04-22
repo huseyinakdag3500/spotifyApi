@@ -13,12 +13,14 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
     const albumEl = document.getElementById('album');
     const albumImageEl = document.getElementById('album-image');
     const loadingEl = document.getElementById('loading');
+    const time_wave = document.querySelector('.time-wave');
 
     
     if (isInitial) {
       loadingEl.style.display = 'block';
       loadingEl.textContent = 'Yükleniyor...';
       nowPlayingDiv.style.display = 'none';
+      time_wave.style.display='none';
     }
 
     const response = await fetch(`/currently-playing?access_token=${accessToken}`);
@@ -35,6 +37,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         loadingEl.style.display = 'block';
         loadingEl.textContent = 'Yükleniyor...';
         nowPlayingDiv.style.display = 'none';
+        time_wave.style.display='none';
       }
 
       if (!data.is_playing || !data.track_id) {
@@ -43,6 +46,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         albumEl.textContent = '';
         albumImageEl.src = '';
         albumImageEl.style.display = 'none';
+        time_wave.style.display='none';
       } else {
         songEl.textContent = data.song;
         artistEl.textContent = `Sanatçı: ${data.artist}`;
@@ -53,6 +57,23 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
+         var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
+        let barCount = Math.floor(nowPlayingWidth/7)+20;
+          time_wave.innerHTML ="";
+          for(let i = 0 ;i<barCount;i++){
+            time_wave.innerHTML += '<div class="bar"></div>';
+          }
+        setInterval(()=>{
+          
+          const time_waveBar = time_wave.querySelectorAll('.bar');
+
+          time_waveBar.forEach((bar,index) =>{
+            let barHeight = Math.floor(Math.random()*75);
+            bar.style.height = barHeight + 'px';
+          });
+          
+          
+        },100);
       }
       nowPlayingDiv.style.display = 'block';
     }
