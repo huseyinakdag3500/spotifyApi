@@ -60,7 +60,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         
         if(time_wave.style.display == "flex"){
          var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
-        let barCount = Math.floor(nowPlayingWidth/10)+20;
+        let barCount = Math.floor(nowPlayingWidth/15)+10;
           time_wave.innerHTML ="";
           for(let i = 0 ;i<barCount;i++){
             time_wave.innerHTML += '<div class="bar"></div>';
@@ -73,13 +73,11 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
             let barHeight = Math.floor(Math.random()*75);
             bar.style.height = barHeight + 'px';
           });
-        }
-          
         },150);
       }
       nowPlayingDiv.style.display = 'block';
     }
-
+  }
     
     loadingEl.style.display = 'none';
   } catch (error) {
