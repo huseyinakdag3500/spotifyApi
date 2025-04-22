@@ -73,7 +73,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
           });
           
           
-        },100);
+        },500);
       }
       nowPlayingDiv.style.display = 'block';
     }
