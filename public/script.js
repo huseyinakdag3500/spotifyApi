@@ -14,7 +14,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
     const albumImageEl = document.getElementById('album-image');
     const loadingEl = document.getElementById('loading');
     const time_wave = document.querySelector('.time-wave');
-
+    console.log(time_wave.style.display);
     
     if (isInitial) {
       loadingEl.style.display = 'block';
@@ -57,7 +57,8 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
-        if(time_wave.style.display === "flex"{
+        
+        if(time_wave.style.display == "flex"{
          var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
         let barCount = Math.floor(nowPlayingWidth/10)+20;
           time_wave.innerHTML ="";
