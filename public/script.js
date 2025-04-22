@@ -53,7 +53,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         albumEl.textContent = `Albüm: ${data.album}`;
         albumImageEl.src = data.image_url || '';
         albumImageEl.style.display = data.image_url ? 'block' : 'none';
-
+        time_wave.style.display="flex";
         
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
