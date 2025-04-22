@@ -6,6 +6,7 @@ function login() {
 }
 
 async function getCurrentlyPlaying(accessToken, isInitial = false) {
+  
   try {
     const nowPlayingDiv = document.getElementById('now-playing');
     const songEl = document.getElementById('song');
@@ -14,13 +15,14 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
     const albumImageEl = document.getElementById('album-image');
     const loadingEl = document.getElementById('loading');
     const time_wave = document.querySelector('.time-wave');
-    console.log(time_wave.style.display);
+    
     
     if (isInitial) {
       loadingEl.style.display = 'block';
       loadingEl.textContent = 'Yükleniyor...';
       nowPlayingDiv.style.display = 'none';
       time_wave.style.display='none';
+      
     }
 
     const response = await fetch(`/currently-playing?access_token=${accessToken}`);
@@ -38,6 +40,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         loadingEl.textContent = 'Yükleniyor...';
         nowPlayingDiv.style.display = 'none';
         time_wave.style.display='none';
+        
       }
 
       if (!data.is_playing || !data.track_id) {
@@ -47,7 +50,9 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         albumImageEl.src = '';
         albumImageEl.style.display = 'none';
         time_wave.style.display='none';
+        
       } else {
+        
         songEl.textContent = data.song;
         artistEl.textContent = `Sanatçı: ${data.artist}`;
         albumEl.textContent = `Albüm: ${data.album}`;
@@ -58,23 +63,30 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
         
-        if(time_wave.style.display == "flex"){
-         var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
-        let barCount = Math.floor(nowPlayingWidth/15)+10;
-          time_wave.innerHTML ="";
-          for(let i = 0 ;i<barCount;i++){
-            time_wave.innerHTML += '<div class="bar"></div>';
-          }
-        setInterval(()=>{
-          
-          const time_waveBar = time_wave.querySelectorAll('.bar');
 
-          time_waveBar.forEach((bar,index) =>{
-            let barHeight = Math.floor(Math.random()*75);
-            bar.style.height = barHeight + 'px';
-          });
-        },150);
-      }
+        if (time_wave.style.display == "flex" && !time_wave.dataset.intervalSet) {
+          time_wave.dataset.intervalSet = "true"; // tekrar çalışmasını engeller
+        
+          const nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
+          const barCount = Math.floor(nowPlayingWidth / 15) + 10;
+        
+          time_wave.innerHTML = "";
+        
+          for (let i = 0; i < barCount; i++) {
+            const bar = document.createElement("div");
+            bar.classList.add("bar");
+            time_wave.appendChild(bar);
+          }
+        
+          const time_waveBar = time_wave.querySelectorAll(".bar");
+        
+          setInterval(() => {
+            time_waveBar.forEach(bar => {
+              const barHeight = Math.floor(Math.random() * 75);
+              bar.style.height = `${barHeight}px`;
+            });
+          }, 150);
+        }
       nowPlayingDiv.style.display = 'block';
     }
   }
@@ -86,8 +98,10 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
     document.getElementById('loading').style.display = 'block';
     setTimeout(() => {
       document.getElementById('loading').style.display = 'none';
+      
     }, 2000); 
   }
+  
 }
 
 
