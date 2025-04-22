@@ -58,7 +58,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         nowPlayingDiv.classList.add('fade-in');
         setTimeout(() => nowPlayingDiv.classList.remove('fade-in'), 500);
         
-        if(time_wave.style.display == "flex"{
+        //if(time_wave.style.display == "flex"{
          var nowPlayingWidth = document.querySelector('#now-playing-container').offsetWidth;
         let barCount = Math.floor(nowPlayingWidth/10)+20;
           time_wave.innerHTML ="";
@@ -76,7 +76,7 @@ async function getCurrentlyPlaying(accessToken, isInitial = false) {
         }
           
         },150);
-      }
+      //}
       nowPlayingDiv.style.display = 'block';
     }
 
